@@ -1,5 +1,6 @@
 import React, {useState,setState} from 'react';
 import './style.css';
+
 function RegistrationForm() {
     
     const [firstName, setFirstName] = useState(null);
