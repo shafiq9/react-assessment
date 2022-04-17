@@ -2,7 +2,7 @@ import React from 'react';
 import './style.css';
 
 
-const Guest = () => {
+const GuestPage = () => {
   return (
     <div>
         <p>You are</p>
@@ -11,4 +11,4 @@ const Guest = () => {
   )
 }
 
-export default Guest;
+export default GuestPage;
