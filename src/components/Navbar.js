@@ -7,11 +7,21 @@ import {
 } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 
-import { NavLink } from "react-router-dom";
+import {NavDropdown} from 'react-bootstrap';
+import { NavLink} from "react-router-dom";
+import { useNavigate } from "react-router";
 
 
 const Navbar = () => {
   const [showMediaIcons, setShowMediaIcons] = useState(false);
+  let user = JSON.parse(localStorage.getItem('user-info'));
+  const navigate  = useNavigate();
+  
+  function LogOut(){
+    localStorage.clear();
+    navigate('/registration');
+  }
+
   return (
     <>
       <nav className="main-nav">
@@ -39,7 +49,13 @@ const Navbar = () => {
               <NavLink to="/login">Login</NavLink>
             </li>
             <li>
-              <NavLink to="/logout">Logout</NavLink>
+              <NavLink to="/logout">
+              <nav>
+              <NavDropdown title="Logout">
+                <NavDropdown.Item onClick={LogOut}>Logout</NavDropdown.Item>
+              </NavDropdown>
+            </nav>
+              </NavLink>
             </li>
             <li>
               <NavLink to="/guest">Guest</NavLink>

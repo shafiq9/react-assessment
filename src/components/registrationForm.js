@@ -1,13 +1,14 @@
 import React, {useState,setState} from 'react';
 import './style.css';
 
+
 function RegistrationForm() {
     
-    const [firstName, setFirstName] = useState(null);
-    const [lastName, setLastName] = useState(null);
-    const [email, setEmail] = useState(null);
-    const [password,setPassword] = useState(null);
-    const [confirmPassword,setConfirmPassword] = useState(null);
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password,setPassword] = useState("");
+    const [confirmPassword,setConfirmPassword] = useState("");
 
     const handleInputChange = (e) => {
         const {id , value} = e.target;
@@ -29,13 +30,28 @@ function RegistrationForm() {
 
     }
 
-    const handleSubmit  = () => {
-        console.log(firstName,lastName,email,password,confirmPassword);
+     const handleSubmit  = async() => {
+
+        let item = {firstName,lastName,email,password,confirmPassword};
+
+        let result = await fetch("https://centralin-staging.clusterfintech.com/api/Users", {
+            method: 'POST',
+            body:JSON.stringify(item),
+            headers:{
+                "content-type":'application/json',
+                "Accept":'application/json'
+            } 
+        });
+
+        result = await result.json();
+
+        // console.log(firstName,lastName,email,password,confirmPassword);
+        
     }
 
     return(
         <div className="form">
-              <h2 className='text-center text-bold'>Registration</h2>
+              <h2 className='text-center'>Registration</h2>
             <div className="form-body">
                 <div className="username">
                     <label className="form-label" for="firstName">First Name </label>

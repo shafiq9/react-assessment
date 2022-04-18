@@ -4,9 +4,9 @@ import './style.css';
 
 function LoginForm() {
     
-    const [email, setEmail] = useState(null);
-    const [password,setPassword] = useState(null);
-    const [confirmPassword,setConfirmPassword] = useState(null);
+    const [email, setEmail] = useState(" ");
+    const [password,setPassword] = useState(" ");
+    const [confirmPassword,setConfirmPassword] = useState(" ");
 
     const handleInputChange = (e) => {
         const {id , value} = e.target;
@@ -22,8 +22,21 @@ function LoginForm() {
 
     }
 
-    const handleSubmit  = () => {
-        console.log(email,password,confirmPassword);
+    const handleSubmit  = async() => {
+
+        let item = {email,password,confirmPassword};
+
+        let result = await fetch("https://centralin-staging.clusterfintech.com/api/Users", {
+            method: 'POST',
+            body:JSON.stringify(item),
+            headers:{
+                "content-type":'application/json',
+                "Accept":'application/json'
+            } 
+        });
+
+        result = await result.json();
+        // console.log(email,password,confirmPassword);
     }
 
     return(
